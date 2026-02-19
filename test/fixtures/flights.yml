@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  num_passengers: 1
+  date: 2026-02-19 17:05:59
+  departing_airport: one
+  arriving_airport: one
+
+two:
+  num_passengers: 1
+  date: 2026-02-19 17:05:59
+  departing_airport: two
+  arriving_airport: two
