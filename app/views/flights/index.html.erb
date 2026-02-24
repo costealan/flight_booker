@@ -1,0 +1,33 @@
+<h1>Search any flight!</h1>
+
+<%= form_with url: flights_path, method: :get do |form| %>
+    <%= form.label :arriving_airport_id, "Arriving at:"%>
+    <%=select_tag(:arriving_airport_id, options_for_select(@airports))%>
+
+    <%= form.label :departing_airport_id, "Departing at:"%>
+    <%=select_tag(:departing_airport_id, options_for_select(@airports))%>
+
+    <%=form.label :date, "Date:"%>
+    <%=form.select :date, options_for_select(@available_dates.map {|d| [Date.parse(d).strftime("%d/%m"), d]}) %>
+
+    <%=form.label :num_passengers, "Passengers:"%>
+    <%=form.select(:num_passengers, 1..4)%>
+    <%= form.submit %>
+<%end %>
+
+<%= form_with url: new_booking_path, method: :get do |form| %>
+    <%= form.collection_radio_buttons :flight_id, @flights, :id, :id do |builder|%>
+        <%=builder.radio_button%>
+        <%= builder.label do %>
+            From: <%= builder.object.departing_airport.code %>
+            →
+            <%= builder.object.arriving_airport.code %>
+            |
+            <%= builder.object.date.strftime("%H:%M %m/%d/%Y") %>
+    <% end %>
+         
+    <%end%>
+
+    <%form.hidden_field :num_passengers, value: @num_passengers%>
+    <%= form.submit "Choose a flight"%>
+<%end%>
