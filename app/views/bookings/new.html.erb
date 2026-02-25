@@ -1,0 +1,29 @@
+<h1>Flight confirmation</h1>
+<section>
+<h2>Flight details: </h2>
+<p>From: <%= @flight.departing_airport.code %></p>
+<p>To: <%= @flight.arriving_airport.code %></p>
+<p>Date: <%= @flight.date %></p>
+</section>
+
+<section>
+<h2>Booking details</h2>
+<%= form_with model: @booking do |form|%>
+    <%= form.hidden_field :flight_id, value: @flight.id%>
+    <h3>Passenger(s) details</h3>
+        <%=form.fields_for :passengers do |passengers_form| %>
+        <h3>Passenger info: </h3>
+            <div>
+                <%=passengers_form.label :name%>
+                <br>
+                <%=passengers_form.text_field :name%>
+            </div>
+            <div>
+                <%=passengers_form.label :email%>
+                <br>
+                <%=passengers_form.email_field :email%>
+            </div>
+        <%end%>
+    <%= form.submit %>
+<%end%>
+</section>
