@@ -15,19 +15,24 @@
     <%= form.submit %>
 <%end %>
 
-<%= form_with url: new_booking_path, method: :get do |form| %>
-    <%= form.collection_radio_buttons :flight_id, @flights, :id, :id do |builder|%>
-        <%=builder.radio_button%>
-        <%= builder.label do %>
-            From: <%= builder.object.departing_airport.code %>
-            →
-            <%= builder.object.arriving_airport.code %>
-            |
-            <%= builder.object.date.strftime("%H:%M %m/%d/%Y") %>
-    <% end %>
-         
-    <%end%>
 
-    <%=form.hidden_field :num_passengers, value: @num_passengers%>
-    <%= form.submit "Choose a flight"%>
+
+<% if @flights.present? %>
+    <%= form_with url: new_booking_path, method: :get do |form| %>
+        <%= form.collection_radio_buttons :flight_id, @flights, :id, :id do |builder|%>
+            <%=builder.radio_button%>
+            <%= builder.label do %>
+                From: <%= builder.object.departing_airport.code %>
+                →
+                <%= builder.object.arriving_airport.code %>
+                |
+                <%= builder.object.date.strftime("%H:%M %m/%d/%Y") %>
+        <% end %>
+            
+        <%end%>
+
+        <%=form.hidden_field :num_passengers, value: @num_passengers%>
+        <%= form.submit "Choose a flight"%>
+    <%end%>
 <%end%>
+
