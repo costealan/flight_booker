@@ -1,0 +1,10 @@
+<h1>Your booking</h1>
+<h2>Flight info:</h2>
+<%=@booking.flight.arriving_airport.code%>
+<%=@booking.flight.departing_airport.code%>
+<%=@booking.flight.date%>
+<h2>Passengers info: </h2>
+<% @booking.passengers.each do |p|%>
+    <p>Name: <%=p.name%></p>
+    <p>Email: <%=p.email%></p>
+<%end%>
