@@ -1,8 +1,8 @@
 class PassengerMailer < ApplicationMailer
   default from: "notifications@example.com"
 
-  def confirmation_email
-    @passenger = params[:passenger]
+  def confirmation_email(passenger)
+    @passenger = passenger
     @url  = "http://example.com/login"
     mail(to: @passenger.email, subject: "You have booked your ticket")
   end
